@@ -145,3 +145,27 @@ dimensions to 128 by the use of PCA.
 * **Unseen Dataset:** `./Data/C56_71_TWOSIDES_unseen.csv`
 #### Output:
 * In the code file
+---
+## FURTHER WORK
+Some work not presented in this repository has been carried out over the same workflow 
+resulting in a system that produces results with AUC=0.86
+#### Reverse Seen and Unseen sets:
+This system tries to discriminate between the _Seen_ drug pairs that don't have rare interactions 
+and the _Unseen_ that do have rare interactions. This function is obviously symmetric so we can 
+solve the same problem by reversing _Seen_ and _Unseen_ sets and training over the drug pairs that 
+do have rare interactions, which is a much larger set, and try to discriminate the pairs that
+don't have rare interactions
+#### Remove the Drug pairs with _medium_ frequency interactions
+We can split the interactions between Drug Pairs into three sets based on the frequency they occur:
+* The Frequent ones
+* The Infrequent ones
+* The Rare ones
+
+Since we want to discriminate over the Rare ones then we can use only the ones that stand in the
+ends of the frequencies, i.e. Remove the Drug Pairs that have Infrequent interactions and only
+keep the pairs that have either Frequent or Rare interactions
+#### Select which of the Frequent Interactions to use
+In the first steps the system creates a prediction vector for the Frequent interactions but not
+all interactions achieve the same prediction accuracy. So it seems logical to use only the 
+predictions for the interactions that we have the highest accuracy to discriminate between the
+Drug pairs with Frequent and Rare interactions.
